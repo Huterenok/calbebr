@@ -31,9 +31,7 @@ void pushVec(Vec* vecPtr, void* src) {
       exit(1);
     }
   }
-  void* container = (void*)malloc(vecPtr->elementSize);
-  memcpy(container, src, vecPtr->elementSize);
-  vecPtr->inner[vecPtr->size++] = container;
+  vecPtr->inner[vecPtr->size++] = src;
 }
 
 void* popVec(Vec* vecPtr) {
@@ -55,7 +53,7 @@ void setVec(Vec* vecPtr, void* item, size_t idx) {
     printf("Vec index out of bounds\n");
     exit(1);
   }
-  memcpy(vecPtr->inner[idx], item, vecPtr->elementSize);
+  vecPtr->inner[idx] = item;
 }
 
 void* getLastVec(Vec* vecPtr) {
@@ -80,9 +78,6 @@ void printVec(Vec* vecPtr, void (*printFn)(void*, void*), void* arg) {
 }
 
 void freeVec(Vec* vecPtr) {
-  for (int i = 0; i < vecPtr->size; i++) {
-    free(vecPtr->inner[i]);
-  }
   free(vecPtr->inner);
   free(vecPtr);
 }

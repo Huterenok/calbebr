@@ -11,5 +11,3 @@ set(SOURCES
 
 add_executable(calbebr ./src/main.c ${SOURCES})
 target_link_libraries(calbebr m)
-
-

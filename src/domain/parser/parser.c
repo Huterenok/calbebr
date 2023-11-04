@@ -13,38 +13,38 @@ Vec* parse(char* expr) {
       continue;
     }
 
-    Token token;
+    Token* token = malloc(TOKEN_SIZE);
     switch (expr[i]) {
     case '+':
-      token.type = OP;
-      token.value.op = ADD;
+      token->type = OP;
+      token->value.op = ADD;
       break;
     case '-':
-      token.type = OP;
-      token.value.op = SUB;
+      token->type = OP;
+      token->value.op = SUB;
       break;
     case '/':
-      token.type = OP;
-      token.value.op = DIV;
+      token->type = OP;
+      token->value.op = DIV;
       break;
     case '*':
-      token.type = OP;
-      token.value.op = MUL;
+      token->type = OP;
+      token->value.op = MUL;
       break;
     case '^':
-      token.type = OP;
-      token.value.op = EXP;
+      token->type = OP;
+      token->value.op = EXP;
       break;
     case '(':
-      token.type = BRACKET;
-      token.value.bracket = OPEN;
+      token->type = BRACKET;
+      token->value.bracket = OPEN;
 
-      enum BracketType push = OPEN;
+      BracketType push = OPEN;
       pushVec(bracketVec, &push);
       break;
     case ')':
-      token.type = BRACKET;
-      token.value.bracket = CLOSE;
+      token->type = BRACKET;
+      token->value.bracket = CLOSE;
 
       BracketType* popped = (BracketType*)popVec(bracketVec);
       if (popped == NULL || *popped != OPEN) {
@@ -66,8 +66,8 @@ Vec* parse(char* expr) {
           }
           i++;
         }
-        token.type = NUM;
-        token.value.num = atof(&expr[num]);
+        token->type = NUM;
+        token->value.num = atof(&expr[num]);
       } else {
         printf("Unexpected element: '%c'\n", expr[i]);
         exit(1);
@@ -76,7 +76,7 @@ Vec* parse(char* expr) {
       break;
     }
 
-    pushVec(tokens, &token);
+    pushVec(tokens, token);
   }
 
   if (bracketVec->size != 0) {

@@ -8,10 +8,12 @@ int main() {
   Vec* configuredExpr = createExpression(tokens);
 
   double res = eval(configuredExpr);
+
   printf("Result of math expression - %f\n", res);
 
   freeVec(tokens);
   freeVec(configuredExpr);
+  free(expr);
 
   return 0;
 }

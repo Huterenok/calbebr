@@ -1,5 +1,6 @@
 #include "eval.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 double eval(Vec* tokens) {
   reverseVec(tokens);
@@ -11,7 +12,7 @@ double eval(Vec* tokens) {
   Token* popped = popVec(tokens);
 
   while (popped != NULL) {
-    double res;
+    double* res = malloc(sizeof(double));
     double right;
     double left;
     char op;
@@ -33,28 +34,28 @@ double eval(Vec* tokens) {
 
       switch (popped->value.op) {
       case ADD:
-        res = left + right;
+        *res = left + right;
         break;
       case SUB:
-        res = right - left;
+        *res = right - left;
         break;
       case DIV:
         if (right == 0) {
           printf("Division by zero)\n");
           exit(1);
         }
-        res = left / right;
+        *res = left / right;
         break;
       case MUL:
-        res = right * left;
+        *res = right * left;
         break;
       case EXP:
-        res = pow(left, right);
+        *res = pow(left, right);
         break;
       }
 
-      pushVec(stack, &res);
-      printf("%zu) %f %c %f = %f\n", count, left, op, right, res);
+      pushVec(stack, res);
+      printf("%zu) %f %c %f = %f\n", count, left, op, right, *res);
       count++;
 
       break;
