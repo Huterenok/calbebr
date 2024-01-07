@@ -2,7 +2,7 @@
 
 #define INITIAL_VEC_SIZE 16
 
-void initVec(Vec** vecPtr, size_t elementSize) {
+void initVec(Vec** vecPtr) {
   Vec* vec = malloc(sizeof(Vec));
   if (!vec) {
     printf("Error while memory allocation\n");
@@ -12,7 +12,6 @@ void initVec(Vec** vecPtr, size_t elementSize) {
   vec->inner = (void**)malloc(INITIAL_VEC_SIZE * sizeof(void*));
   vec->size = 0;
   vec->capacity = INITIAL_VEC_SIZE;
-  vec->elementSize = elementSize;
   if (!vec->inner) {
     printf("Error while memory allocation\n");
     exit(1);

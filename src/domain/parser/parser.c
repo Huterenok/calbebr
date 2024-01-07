@@ -2,11 +2,11 @@
 
 Vec* parse(char* expr) {
   Vec* tokens;
-  initVec(&tokens, TOKEN_SIZE);
+  initVec(&tokens);
 
   Vec* bracketVec;
 
-  initVec(&bracketVec, BRACKET_SIZE);
+  initVec(&bracketVec);
 
   for (int i = 0; i < strlen(expr) - 1; i++) {
     if (isspace(expr[i])) {

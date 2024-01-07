@@ -7,4 +7,4 @@ Vec* parse(char* expr);
 void printTokens(Vec* tokens);
 char opToChar(Token* token);
 
-#endif //PARSER_H
+#endif // PARSER_H

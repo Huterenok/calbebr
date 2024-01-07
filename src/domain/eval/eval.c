@@ -6,7 +6,7 @@ double eval(Vec* tokens) {
   reverseVec(tokens);
 
   Vec* stack;
-  initVec(&stack, sizeof(double));
+  initVec(&stack);
 
   size_t count = 1;
   Token* popped = popVec(tokens);
@@ -22,8 +22,7 @@ double eval(Vec* tokens) {
       pushVec(stack, &popped->value.num);
       break;
     case OP:
-      if (getVec(stack, stack->size - 2) == NULL ||
-          getVec(stack, stack->size - 1) == NULL) {
+      if (stack->size < 2) {
         printf("Error while evaluating expression\n");
         exit(1);
       }
@@ -37,7 +36,7 @@ double eval(Vec* tokens) {
         *res = left + right;
         break;
       case SUB:
-        *res = right - left;
+        *res = left - right;
         break;
       case DIV:
         if (right == 0) {

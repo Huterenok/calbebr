@@ -6,4 +6,4 @@
 
 double eval(Vec* tokens);
 
-#endif //EVAL_H
+#endif // EVAL_H
